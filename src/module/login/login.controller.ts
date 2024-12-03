@@ -1,12 +1,14 @@
-import { Controller, Get, Query, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Req } from '@nestjs/common';
 import { LoginService } from './login.service';
+import { SigninReqDto, SigninResDto } from './dto/signin.dto';
 
-@Controller('login')
+// @Controller('login')
+@Controller()
 export class LoginController {
   constructor(private readonly loginService: LoginService) { }
 
-  @Get()
-  login(@Query('userId') userId: string): object {
-    return this.loginService.login(userId)
+  @Post('/signin')
+  async signin(@Body() signinReqDto: SigninReqDto): Promise<SigninResDto> {
+    return await this.loginService.signin(signinReqDto)
   }
 }
