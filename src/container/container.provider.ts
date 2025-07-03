@@ -1,6 +1,6 @@
-import Docker from 'dockerode'
+import * as Docker from 'dockerode';
 
 export const ContainerProvider = {
-    provide: 'CONTAINER',
-    useFactory: () => new Docker({ socketPath: '' })
+    provide: Docker,
+    useFactory: () => new Docker({ socketPath: '/var/run/docker.sock' })
 }

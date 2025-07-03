@@ -5,7 +5,7 @@ import { ContainerModule } from './container/container.module';
 import { ExamModule } from './exam/exam.module';
 
 @Module({
-  imports: [/*ContainerModule,*/ ExamModule],
+  imports: [ContainerModule, ExamModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -13,11 +13,16 @@ export class ContainerController {
     // start container
     // curl localhost:3000/container/start -X POST -H "Content-Type: application/json" -d '{"id": "1234"}'
     @Post('start')
-    startContainer(@Body('id') id: string): string {
-        return this.service.startContainer(id)
+    async startContainer(@Body('id') id: string): Promise<string> {
+        return await this.service.startContainer(id)
     }
 
     // stop container
+    // curl localhost:3000/container/stop -X POST -H "Content-Type: application/json" -d '{"id": "1234"}'
+    @Post('stop')
+    async stopContainer(@Body('id') id: string): Promise<string> {
+        return await this.service.stopContainer(id)
+    }
 
     // run container
 }
