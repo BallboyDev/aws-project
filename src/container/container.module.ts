@@ -5,6 +5,7 @@ import { ContainerProvider } from './container.provider';
 
 @Module({
   controllers: [ContainerController],
-  providers: [ContainerService, ContainerProvider]
+  providers: [ContainerService, ContainerProvider],
+  exports: [ContainerService, ContainerProvider],
 })
-export class ContainerModule { }
+export class ContainerModule {}

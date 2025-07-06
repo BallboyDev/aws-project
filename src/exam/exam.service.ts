@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class ExamService {
     constructor(private readonly httpService: HttpService) { }
 
-    async submit(lang: string, code: string): Promise<string> {
+    async submit(lang: string, code: string): Promise<{ id: string | null, fileName: string | null, ext: string | null, msg: string }> {
         const extensions: { [key: string]: string } = {
             'c': 'c',
             'c++': 'cpp',
@@ -22,15 +22,15 @@ export class ExamService {
         formData.append('file', new Blob([code], { type: 'text/plain' }), filename);
 
         try {
-            const response = await firstValueFrom(this.httpService.post('http://localhost:3100/upload', formData, {
+            const res = await firstValueFrom(this.httpService.post('http://localhost:3100/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             }));
-            return `File sent successfully. Server response: ${JSON.stringify(response.data)}`;
+            return res.data
         } catch (error) {
             console.log(error)
-            return `Failed to send file. Error: ${error.message}`;
+            return { id: null, fileName: null, ext: null, msg: error }
         }
     }
 }

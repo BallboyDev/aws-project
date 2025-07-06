@@ -25,4 +25,12 @@ export class ContainerController {
     }
 
     // run container
+    // curl -X POST  localhost:3000/container/run -H "Content-Type: application/json" -d '{"image": "container_js:latest", "fileName": "test.js"}'
+    @Post('run')
+    async runContainer(@Body() body: { image: string, fileName: string }): Promise<{ id: string, message: string }> {
+
+        const { image, fileName } = body
+
+        return await this.service.runContainer(image, fileName)
+    }
 }
